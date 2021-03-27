@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 可以将js代码编写到外部js文件中，然后通过script标签引入 
+        写到外部文件中可以在不同的页面中同时引用，也可以利用到浏览器的缓存机制
+        推荐使用的方式
+    -->
+    <!-- script标签一旦用于引入外部文件了，就不能在编写代码了，即使编写了浏览器也会忽略 
+         如果需要则可以再创建一个新的script标签用于编写内部代码
+    -->
+
+    <!-- <script src='learn1.js'>
+        alert('我是内部的js')/*不执行*/
+    </script> -->
+    <script>
+        /*var a=111111.1;
+        var str='good';
+        console.log(str);
+        console.log(typeof a)
+        console.log(Number.MAX_VALUE) */
+       /*var numToStr=123;
+        console.log(typeof String(numToStr))*/
+        /*var a="123";
+        a=Number(a);
+        console.log(typeof a)*/
+        
+        /*var result =Math.floor(3/2);
+        console.log(result);*/
+
+       /* var a=1;
+        console.log(a++);*/
+
+       /* var score = prompt("年纪");
+        console.log(score);
+        console.log(Math.sqrt(10))*/
+
+        function fun(a,b){
+            console.log("hello");
+            return a+b;
+        }
+        var sum=fun(1,2);
+        console.log(sum);
+
+        var obj={
+            name:"zzh",
+            age:18,
+            sayName:function(){
+                console.log(obj.name);
+            }
+        }
+        console.log(obj[name])
+        for(var i in obj){
+            console.log(i);
+            console.log(typeof i)
+            console.log(obj[i]);
+        }
+        function Person(name,age,gender){
+            this.name=name;
+            this.age=age;
+            this.gender=gender;
+            this.sayName=function(){
+                alert(this.name);
+            }
+        }
+        var arr=new Array(); 
+    arr[0]=10; arr[1]=33;
+    console.log(arr.length);
+    </script>
+    <script >
+        /*输出语句*/
+        /*
+         *控制浏览器弹出警告窗口
+         * alert("hello world")
+         */
+        /*
+         * 让计算机在页面中输出一个内容
+         * document.write()可以向body中输出一个内容
+         * document.write("hello world"+"<br />")
+         */
+        
+         /*
+          * 向控制台输出一个内容
+          * console.log()的作用是向控制台输出一个内容
+          * console.log("hello world")
+          */
+        
+    </script>
+    <style>
+        body{
+            width:2000px;
+        }
+        span{
+            display:inline-block;
+            width:80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 补充：表示小于号 &lt;  空格为&nbsp -->
+    <!-- 
+    可以江s代码编写到标签的onclick属性中
+    当我们点击按钮时，js代码才会执行 
+
+    虽然可以写在标签的属性中，但是他们属于结构与行为耦合，不方便维护，不推荐使用
+    -->
+    <button onclick="alert('hello world')">点我</button>
+
+    <!-- 可以将js代码写在超链接的href属性中，这样点击超链接时，会执行js代码 -->
+    <a href="javascript:alert('点一下');">click</a>
+    <a href="javascript:;">click</a>
+    
+</body>
+</html>

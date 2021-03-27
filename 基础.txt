@@ -1,0 +1,337 @@
+<!-- <script src='learn1.js'>
+        alert('我是内部的js')/*不执行*/
+
+1. js严格区分大小写
+2. js中每一条语句以;结尾
+    -如果不写分号，浏览器会自动添加，但是会消耗一些系统资源，
+    而且有时候浏览器会加错分号，所以在开发中分号必须加
+3. js中会忽略多个空格和换行，所以我们可以利用空格和换行对代码进行格式化
+
+4. 标识符规则
+    1.标识符中可以含有字母、数字、_、$
+    2.标识符不能以数字开头
+    3.标识符不能是ES中的关键字或保留字
+    4.标识符一般采用驼峰命名法
+        -首字母小写，每个单词的开头字母大写、其余字母小写
+        helloWorld
+    -js底层保存标识符实际上是采用的Unicode编码
+
+5. 数据类型有六种：String Number Boolean Null Undefine 属于基本数据类型
+                  Object 属于引用数据类型
+    typeof a  语法 来检测a的数据类型
+    string 使用双引号和单引号都可以，\表示转义字符
+    Number  包括整数和浮点数
+            Number.MAX_VALUE 1.7976931348623157e+308 
+            Number.MIN_VALUE 5e-324  大于0的最小值
+            Infinity 表示正无穷
+            -Infinity 表示负无穷
+            如果使用number表示的数字超过了最大值，则会返回一个Infinity
+            NaN 是一个特殊的数字，表示NOT a Number
+            使用typeof NaN 返回也是number
+            如果使用js进行浮点元素计算，可能得到一个不精确的结果
+    Boolean 布尔值
+            true 逻辑真
+            false 逻辑假
+    Null 类型值只有一个就是null
+            null值表示一个空对象
+            使用typeof 检查null值，会返回object
+    Undefined  当声明一个变量，但是并不给变量赋值时，值为undefined
+
+6.强制类型转换
+    ·将一个数据类型强制转换为其他的数据类型
+    ·类型转换主要指，将其他的数据类型，转换为String Number Boolean
+    1.将其他数据类型转换为String （1）调用.toSrting()方法  null和undefined不能调用toString()，因为没有数值
+                               （2） String(a)
+    2.将其他的类型转换为Number  (1) Number(a)  字符串-->数字
+                                    1.如果是纯数字的字符串，则直接将其转换成数字
+                                    2.如果字符串中有非数字的内容，则转换为NaN
+                                    3.如果字符串是空串或全是空格的字符串，则转换为0
+                                    4.Boolean --> 数字  true转为1  false转为0
+                                    5. null转为0
+                                    6. undefined转为NaN
+                               (2) 针对字符串转换  取出子串中的第一个有效整数内容取出来 
+                               parseInt(a,10)表示将a用10进制转换，10为指定的基数
+                               static int parseInt(String s, int radix)
+                               s -- 十进制表示的字符串
+                               radix -- 指定的基数
+                                如果对非String类型使用parseInt()或parseFloat()它会先将其转换为String，然后再操作
+                                如123px,parseInt(123px)返回123 
+                                如123a456px,parseInt(123a456px)返回123
+                                如a=true; a=parseInt(a) 返回NaN
+                                    -parseInt(a)  字符串转为Int
+                                    -parseFloat(a) 字符串转为Float
+    3.将其他的类型转换为Boolean 使用Boolean() 函数   
+        数字--> Boolean  除了0和NaN 其余的都是true
+        字符串 --> Boolean 除了空串 其余的都是true
+        null和undefined都会转换为false
+        对象会转换为true
+        var a=123 Boolean(a) //true
+        var a=-123 Boolean(a) //true
+        var a=0 Boolean(a) //false
+        var a=Infinity Boolean(a) //true
+        var a=NaN Boolean(a) //false
+7.其他进制的数字
+    0x10 = 十进制16  0x开头为16进制
+    070 = 十进制56   0开头为8进制
+                    2进制的数字用0b开头
+
+8.运算符
+    运算符也叫操作符
+    通过运算符可以对一个或多个值进行运算
+    如: typeof就是运算符，可以来获得一个值的类型 它会将该值的类型以字符串的形式返回
+
+    算数运算符 + - * / %  注：任何数和NaN做运算，结果都是NaN
+                任何的值和字符串做加法运算，都会先转换为字符串，然后再和字符串做拼串操作
+                两个值做减法会将其转换为Number再进行运算
+    
+    一元运算符：
+            + 正号
+            - 负号  对数字进行取反
+                    - 对于非Number类型的值 
+                        它会先转换为Number，然后再运算
+            ++ 自增
+            -- 自减
+    
+    逻辑运算符
+            ! 非
+
+            && 与 
+                注:第一个值为true，会检查第二个值
+                // true && alert("会弹窗")
+                   第一个值为false，则不会检查第二个值
+                // false && alert("不会弹窗")
+
+            || 或
+                注:第一个值为false，会检查第二个值
+                // flase || alert("会弹窗")
+                   第一个值为true，则不会检查第二个值
+                // true || alert("不会弹窗")
+
+            && || 非布尔值的情况
+                    ·对于非布尔值进行与或运算时，会将其先转换为布尔值，然后再运算，并且返回原值
+            && 与运算，如果两个值都为true，返回后面的 5&&6 返回6
+                      false && true 如果有false返回0 NaN && 0 返回NaN ; 0 && NaN 返回0 都false返回靠前的false
+                ·如果第一个值为true，则返回第二个值 
+                ·如果第一个值为false，则直接返回第一个值
+            || 或运算  如果第一个值为true，则直接返回第一个值
+                       如果第一个值为false，则直接返回第二个值
+        
+    赋值运算符  +  += -= *= /= %=
+
+    关系运算符  > >=  < <=  == != === !==
+            对于非数值进行比较时，会将其转换为数字然后再比较
+            如果符号两侧的值都是字符串时，不会将其转换成数字进行比较，而会分别比较unicode
+            console.log(1>"10")返回false，
+            console.log(10 > null)返回true  console.log(10>"hello")返回false  注：任何值和NaN做任何比较都是false
+
+            当使用==来比较两个值时，如果值的类型不同，会自动转换成相同的类型
+            NaN不和任何值相等，包括他本身
+
+            ===  表示全等，不做自动类型转换
+            !==  表示不全等， 不做自动类型转换
+
+    条件运算符  条件表达式?语句1:语句2
+                 条件运算符在执行时，首先对条件表达式进行求值
+                            如果该值为true，则执行语句1，并返回执行结果
+                            如果该值为false，则执行语句2，并返回执行结果
+    
+    运算符优先级
+                ·[] new
+                · ()
+                · ++ 、 --
+                · ！ + - typeof void delete
+                · % 、 * 、/
+                · +(双目)  、 -(双目)
+                · << 、 >> 
+                · < 、 <= 、 > 、 >=
+                · &&
+                · ||
+
+9.语句
+    条件判断语句:
+    if(条件判断){
+        代码块;
+        if(条件表达式){
+            代码块;
+        }
+        else if(条件表达式){
+            代码块;
+        }
+        else{
+            代码块
+        }
+    }
+
+    switch(num){
+        case 值:
+            语句..;
+            break;
+        case 值:
+            语句..;
+            break;
+        default:
+            语句..;
+            break;
+    }
+
+    while循环
+    while(条件判断){
+        语句;
+    }
+
+    for循环
+    for(var i=0;i<10;i++){
+        语句;
+    }
+
+
+10.对象
+    对象的分类：
+        1.内建对象
+            ·由ES标准中定义的对象，在任何的ES的实现中都可以使用
+            · 比如，Math String Number Boolean Function Object ..
+        2.宿主对象
+            ·由JS的运行环境提供的对象，目前来讲主要指由浏览器提供的对象
+            · 比如 BOM DOM  (console 和 document就是提供的)
+        3.自定义对象
+            ·由开发人员自己创建的对象
+
+11.自定义对象的基本内容:
+    向对象添加属性语法: 对象.属性名 = 属性值;
+    读取对象中的属性语法: 对象.属性名  //如果读取对象中没有的属性，不会报错而会返回undefined
+    修改对象的属性值语法: 对象.属性名=新值
+    删除对象的属性语法:   delete 对象.属性值
+
+    in 运算符
+        ·通过该运算符可以检查一个对象中是否含有指定的属性
+            如果有则返回true，没有则返回false
+        语法： "属性名" in 对象  console.log("test" in obj)
+
+12.引用数据类型:
+    var obj=new Object();
+    obj.name="hello";
+    var obj1=obj;
+    obj.name="world";
+    console(obj1.name) //world  常量
+
+    n="name"; 
+    console(obj1[n]);  //[]中变量
+13. 创建对象
+    var obj=new Object(); 等价于 var obj={} //使用对象字面量来创建一个对象
+    使用对象字面量，可以在创建对象时，直接指定对象中的属性
+    语法:{属性名:属性值,属性名:属性值,属性名:属性值} 对象字面量的属性名可以加引号也可以不加，建议不加
+        var obj={
+            name:"zzh",
+            age:18,
+            sayName:function(){
+                console.log(obj.name);
+            }
+        }   
+        //重要
+        for(var i in obj){
+            console.log(i);
+            console.log(obj[i]);
+        } 
+
+14. 函数 使用函数声明来创建一个对象
+    语法:
+        function 函数名([形参1,形参2..形参N]){
+            语句;
+        }
+    可以在函数的()中指定一个或多个形参,调用函数时解析器不会检查实参的类型
+    所以要注意是否有可能会接收到非法的参数，如果有可能则要对参数进行类型检查
+    调用函数时，解析器也不会检查实参的数量，多余实参不会被赋值
+    如果实参数量少于形参的数量，则没有对应实参的形参时undefined
+    如果函数中不写return，则会返回undefined
+    function sum(a,b){
+        console.log(a+b);
+        return a+b;
+    }
+    可以在函数内部声明定义函数(不同于c)
+
+15.作用域
+    变量的声明提前
+        ·使用var关键字声明的变量,会在所有的代码的执行之前声明
+        ·函数声明也会在函数中所有的代码执行之前执行(函数中定义变量没有使用var关键字，则会设置为全局变量)
+    ·全局作用域在页面打开时创建，在页面关闭时销毁
+    ·在全局作用域中有一个全局对象window，
+        它代表的时一个浏览器的窗口，它由浏览器创建我们可以直接使用
+    ·在全局作用域中，
+        创建的变量都会作为window对象的属性保存
+        创建的函数会作为window对象的方法保存
+        var a=10; console.log(window.a); console.log(window);
+
+16.this指针
+    1.以函数的形式调用时，this永远是window
+    2.以方法的形式调用时，this就是调用该方法的对象
+
+17.构造函数 (也将一个构造函数称为一个类)
+    使用instanceof可以检查一个对象是否是一个类的实例
+    console.log(per instanceof Person) //如果是返回true，否则返回false
+    console.log(per instanceof Object) //返回true
+
+    构造函数就是一个普通的函数，创建方式和普通函数没有区别，
+    不同的是构造函数习惯上首字母大写
+
+    构造函数和普通函数的区别就是调用方式不同
+    普通函数直接调用 fun() ,构造函数需要使用new关键字来调用 new Person()
+
+    构造函数的执行流程，
+        1.立刻创建一个新的对象
+        2.将新建的对象设置为函数中的this
+        3.逐行执行函数中的代码
+        4.将新建的对象作为返回值返回
+
+        function Person(){
+            this.name="孙悟空";
+            this.age=18;
+            this.gender="男";
+            this.sayName=function(){
+                alert(this.name);
+            }
+        }
+        注:可将sayName方法在全局作用域中定义
+        function fun(){
+            alert("Hello"+this.name)
+        }
+
+18.原型对象 (类似于父类) MyClass.prototype.sayHello=function(){
+                            console.log("hello");
+                        }
+    原型prototype,我们所创建的每一个函数，解析器都会向函数中添加一个属性prototype
+        这个属性对应者一个对象，这个对象就是所谓的原型对象
+    如果函数作为普通函数调用prototype没有任何作用
+    当函数以构造函数的形式调用时，它所创建的对象中都会有一个隐含的属性
+
+    原型对象就相当于一个公共区域，所有同一个类的实例都可以访问到这个原型对象，
+        我们可以将对象中共有的内容，统一设置到原型对象中 
+
+    当我们访问对象的一个属性或方法时，它会先在对象自身中寻找，如果有则直接使用，如果没有则会去原型对象中寻找,知道找到Object对象的原型，
+    Object对象的原型没有原型，如果在Onject中依然没有找到，则返回undefined
+
+    Person.prototype.toString = function(){
+        return "name="+this.name+",age="+this.age+",gender="+this.gender";
+    }
+19.重写方法
+    直接在外部定义
+    per.toString = function(){
+        return "name="+this.name+",age="+this.age+",gender="+this.gender";
+    }
+
+20.垃圾回收机制（garbage collection）
+    当一个堆空间没有任何的变量或属性对它进行引用，此时我们将永远无法操作该对象，
+    
+21.数组
+    数组中的元素可以是任意的数据类型
+    arr=["hello",1,true,null,undefined];
+    var arr=new Array(); 
+    var arr1=[];// 和 var arr=new Array(); 效果一样
+    arr[0]=10; arr[1]=33;
+    arr.length可以获得数组长度,向数组的最后一个位置添加元素arr[arr.length]=70;
+    var arr=new Array(10);//表示创建长度为10的数组
+
+    数组的方法：pop() 
+        push() 向数组最后添加一个或多个元素，返回新的数组长度
+        shift()     删除数组的第一个元素，并将被删除的元素作为返回值返回
+        unshift()   向数组开头添加一个或多个元素，返回新的数组长度
+        arr.foreach()   方法需要一个函数作为参数 
